@@ -334,7 +334,7 @@
         .tab-btn { background: none; border: none; color: var(--text-muted); font-family: var(--font-heading); font-size: 1.1rem; padding: 8px 24px; cursor: pointer; transition: var(--transition-fast); }
         .tab-btn.active, .tab-btn:hover { color: var(--accent-gold); }
         
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 30px; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
         .service-item-card { display: none; opacity: 0; transform: scale(0.95); transition: transform 0.5s ease, opacity 0.5s ease; }
         .service-item-card.show { display: flex; flex-direction: column; animation: fadeInUp 0.5s forwards; }
 
@@ -391,6 +391,25 @@
             .nav-menu.active { left: 0; }
             .nav-menu ul { flex-direction: column; align-items: center; padding-top: 60px; gap: 40px; }
             .mobile-toggle { display: block; }
+
+            /* Footer mobile layout */
+            .footer-grid { grid-template-columns: 1fr; gap: 30px; text-align: center; }
+            .footer-brand p { margin: 16px auto 0; }
+        }
+
+        @media (max-width: 600px) {
+            .form-row { grid-template-columns: 1fr; gap: 15px; }
+        }
+
+        @media (max-width: 480px) {
+            .header-container { height: 70px; }
+            .logo { font-size: 1.4rem; }
+            .btn-sm { padding: 8px 14px; font-size: 0.8rem; }
+            .nav-menu { top: 70px; height: calc(100vh - 70px); }
+            .hero-buttons { flex-direction: column; width: 100%; }
+            .hero-buttons .btn { width: 100%; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .whatsapp-float { bottom: 20px; right: 20px; width: 50px; height: 50px; font-size: 1.6rem; }
         }
 
         /* Gallery Section */
@@ -961,7 +980,7 @@
         }
         .testimonials-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
             margin-top: 40px;
         }
