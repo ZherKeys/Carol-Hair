@@ -1783,7 +1783,7 @@
                 });
             });
 
-            // Form validation
+            // Form validation and WhatsApp redirection
             const form = document.getElementById('booking-form');
             const status = document.getElementById('booking-status');
             if (form) {
@@ -1802,13 +1802,47 @@
                         const btn = document.getElementById('submit-booking-btn');
                         btn.querySelector('span').textContent = 'Agendando...';
                         btn.disabled = true;
+
+                        // Coletar dados do formulário
+                        const name = document.getElementById('b-name').value;
+                        const serviceSelect = document.getElementById('b-service');
+                        const service = serviceSelect.options[serviceSelect.selectedIndex].text;
+                        const dateVal = document.getElementById('b-date').value;
+                        const timeSelect = document.getElementById('b-time');
+                        const time = timeSelect.options[timeSelect.selectedIndex].text;
+                        const clientPhone = document.getElementById('b-phone').value;
+
+                        // Formatar data para DD/MM/AAAA
+                        let formattedDate = dateVal;
+                        try {
+                            const [year, month, day] = dateVal.split('-');
+                            formattedDate = `${day}/${month}/${year}`;
+                        } catch(err) {}
+
+                        // Formatar mensagem para o WhatsApp do Salão
+                        const messageText = `Olá Carolina Freitas! Gostaria de fazer um agendamento online:\n\n` +
+                                            `👤 *Nome:* ${name}\n` +
+                                            `💇 *Serviço:* ${service}\n` +
+                                            `📅 *Data:* ${formattedDate}\n` +
+                                            `⏰ *Horário:* ${time}\n` +
+                                            `📱 *Telefone de Contato:* ${clientPhone}`;
+
+                        const encodedMessage = encodeURIComponent(messageText);
+                        // Envia para o WhatsApp do Salão de Araruama: (22) 98831-5051
+                        const whatsappUrl = `https://wa.me/5522988315051?text=${encodedMessage}`;
+
                         setTimeout(() => {
                             btn.querySelector('span').textContent = 'Fazer Agendamento Online';
                             btn.disabled = false;
                             status.style.display = 'flex';
+                            
+                            // Abre o WhatsApp com os dados preenchidos
+                            window.open(whatsappUrl, '_blank');
+
                             form.reset();
+                            if (dateInput) dateInput.value = new Date().toISOString().split('T')[0];
                             setTimeout(() => status.style.display = 'none', 5000);
-                        }, 1800);
+                        }, 1200);
                     }
                 });
             }
